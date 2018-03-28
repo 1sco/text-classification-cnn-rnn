@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
+# from __future__ import print_function
 
 import os
 import sys
@@ -10,18 +10,17 @@ from datetime import timedelta
 
 import numpy as np
 import tensorflow as tf
+from Chinese_text.cnn_model import TCNNConfig, TextCNN
+from Chinese_text.data.cnews_loader import read_vocab, read_category, batch_iter, process_file, build_vocab
 from sklearn import metrics
 
-from cnn_model import TCNNConfig, TextCNN
-from data.cnews_loader import read_vocab, read_category, batch_iter, process_file, build_vocab
-
-base_dir = 'data/cnews'
+base_dir = '~/PycharmProjects/bishe/Chinese_text/data/cnews'
 train_dir = os.path.join(base_dir, 'cnews.train.txt')
 test_dir = os.path.join(base_dir, 'cnews.test.txt')
 val_dir = os.path.join(base_dir, 'cnews.val.txt')
 vocab_dir = os.path.join(base_dir, 'cnews.vocab.txt')
 
-save_dir = 'checkpoints/textcnn'
+save_dir = '~/PycharmProjects/bishe/Chinese_text/checkpoints/textcnn'
 save_path = os.path.join(save_dir, 'best_validation')  # 最佳验证结果保存路径
 
 
@@ -60,7 +59,7 @@ def evaluate(sess, x_, y_):
 def train():
     print("Configuring TensorBoard and Saver...")
     # 配置 Tensorboard，重新训练时，请将tensorboard文件夹删除，不然图会覆盖
-    tensorboard_dir = 'tensorboard/textcnn'
+    tensorboard_dir = '~/PycharmProjects/bishe/Chinese_text/tensorboard/textcnn'
     if not os.path.exists(tensorboard_dir):
         os.makedirs(tensorboard_dir)
 
